@@ -14,14 +14,8 @@
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
-
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+* Installs ksmb backend to enable Kerberised Samba printing on the node.
+* Installs arbitrary PPD files to arbitrary directories on the node (because the CUPS module this depends on doesn't install PPD files).
 
 ## Setup
 
@@ -40,12 +34,9 @@ If there's more that they should know about, though, this is the place to mentio
 
 ### Setup Requirements **OPTIONAL**
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+* You need puppetlabs-stdlib and leoarnold-cups Puppet modules.
+* You need a [file server mount point](https://docs.puppet.com/puppet/4.9/file_serving.html) on your Puppet server that is served as puppet:///files/printer-ppds, or else override that location in Hiera.
+* You need a Linux system joined to the same AD domain as the Samba printer server and a valid Kerberos ticket for the user who wishes to print.  At my site, the Linux nodes use the AD to authenticate user logins.
 
 ### Beginning with ksmb
 
@@ -55,9 +46,37 @@ basic use of the module.
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+You are using Hiera, right?
+
+Put the following in your site.pp:
+``` puppet
+hiera_include('classes')
+```
+
+The following Hiera in a suitable place:
+
+``` yaml
+classes:
+  - cups
+  - ksmb
+
+ksmb::ppdfiles:
+  - KMbeuC554ux.ppd
+ksmb::filterfiles:
+  - KMbeuEmpPS.pl
+
+cups::hiera: merge
+cups::papersize: A4
+cups::web_interface: true
+cups::default_queue: PostRoom
+cups_queue:
+  PostRoom:
+    ensure: printer
+    uri: ksmb://printserver.example.com/PostRoomKonica
+    ppd: "%{::ksmb::ppdpath}/KMbeuC554ux.ppd"
+    accepting: true
+    enabled: true
+```
 
 ## Reference
 
@@ -68,8 +87,7 @@ se.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+This is actually a limitation of leoarnold-cups, but it might help you when deploying: if your global hiera.yaml specifies a merge_behavior other than the default "native", you won't be able to set a default queue in a common.yaml and then override it further up the hierarchy.
 
 ## Development
 
