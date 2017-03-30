@@ -1,0 +1,13 @@
+---
+version: 4
+datadir: data
+hierarchy:
+  - name: "distro release"
+    backend: yaml
+    path: "distro/%{os.distro.id}/%{os.distro.codename}"
+  - name: "distro"
+    backend: yaml
+    path: "distro/%{os.distro.id}"
+  - name: "common"
+    backend: yaml
+    path: "common"

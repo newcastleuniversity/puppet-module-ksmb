@@ -1,0 +1,16 @@
+{
+  "name": "helen-ksmb",
+  "version": "0.1.0",
+  "author": "Durhan University CIS and others",
+  "summary": "Allow kerberised samba printing from cups clients",
+  "license": "Apache-2.0",
+  "source": "",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"leoarnold-cups","version_requirement":">= 1.2.2"}
+  ],
+  "data_provider": "hiera"
+}
+

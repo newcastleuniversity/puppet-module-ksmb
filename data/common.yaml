@@ -1,0 +1,7 @@
+---
+ksmb::ppdsource: 'puppet:///files/printer-ppds'
+
+lookup_options:
+  ksmb::ppdfiles:
+    merge:
+      strategy: unique
