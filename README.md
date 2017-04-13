@@ -18,6 +18,7 @@
 * Installs arbitrary PPD files to arbitrary directories on the node (because the CUPS module this is designed to work with doesn't install PPD files).
 
 TODO: split this module as it does two things.
+TODO: remove stated dependency on leoarnold-cups and rewrite docs to suggest use of leoarnold-cups instead of mandating it.  It doesn't actually matter to this module how CUPS is managed.
 
 
 ## Setup
