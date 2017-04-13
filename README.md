@@ -15,7 +15,10 @@
 ## Description
 
 * Installs ksmb backend to enable Kerberised Samba printing on the node.
-* Installs arbitrary PPD files to arbitrary directories on the node (because the CUPS module this depends on doesn't install PPD files).
+* Installs arbitrary PPD files to arbitrary directories on the node (because the CUPS module this is designed to work with doesn't install PPD files).
+
+TODO: split this module as it does two things.
+
 
 ## Setup
 

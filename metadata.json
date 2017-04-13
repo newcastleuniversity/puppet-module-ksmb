@@ -2,7 +2,7 @@
   "name": "helen-ksmb",
   "version": "0.1.0",
   "author": "Durham University CIS and others, refactored for Puppet 4 by helen.griffiths@newcastle.ac.uk",
-  "summary": "Allow kerberised samba printing from cups clients",
+  "summary": "Allow kerberised samba printing from cups clients.  LeoArnold-CUPS is used to create the queues",
   "license": "Apache-2.0",
   "source": "",
   "project_page": null,
