@@ -24,20 +24,6 @@ class ksmb::config inherits ksmb {
 
   }
 
-  $ksmb::filterfiles.each |$filterfile| {
-
-    file { "${ksmb::filterpath}/${filterfile}" :
-      ensure  => file,
-      replace => true,
-      owner   => 'root',
-      group   => 'root',
-      source  => "${ksmb::ppdsource}/${filterfile}",
-      mode    => '0555',
-      notify  => Service[$ksmb::service],
-    }
-
-  }
-
   file { '/etc/sudoers.d/lp' :
     ensure  => file,
     replace => true,
