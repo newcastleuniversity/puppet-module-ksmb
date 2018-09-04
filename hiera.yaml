@@ -7,3 +7,6 @@ hierarchy:
     path: "distro/%{::facts.lsbdistid}"
   - name: common
     path: common
+defaults:
+  data_hash: yaml_data
+  datadir: data
