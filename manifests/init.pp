@@ -45,6 +45,12 @@
 
 class ksmb {
 
+  $ppdpath
+  $ppdsource
+  $ppdfiles
+  $package_list
+  $service
+
   anchor { '::ksmb::begin': } ->
   class { '::ksmb::install': } ~>
   class { '::ksmb::config': } ->
