@@ -45,11 +45,11 @@
 
 class ksmb (
 
-  String $ppdpath,
-  String $ppdsource,
-  Array[String] $ppdfiles,
-  Array[String] $package_list,
-  String $service
+  Optional[String] $ppdpath,
+  Optional[String] $ppdsource,
+  Optional[Array[String]] $ppdfiles,
+  Optional[Array[String]] $package_list,
+  Optional[String] $service
 
 ){
 
