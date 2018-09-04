@@ -45,11 +45,11 @@
 
 class ksmb (
 
-  Optional[String] $ppdpath = lookup('ksmb::ppdpath'),
-  Optional[String] $ppdsource = lookup('ksmb::ppdsourc'),
-  Optional[Array[String]] $ppdfiles = lookup('ksmb::ppdfiles'),
-  Optional[Array[String]] $package_list = lookup('ksmb::package_list'),
-  Optional[String] $service = lookup('ksmb::service')
+  Optional[String] $ppdpath,
+  Optional[String] $ppdsource,
+  Optional[Array[String]] $ppdfiles,
+  Optional[Array[String]] $package_list,
+  Optional[String] $service
 
 ){
 
