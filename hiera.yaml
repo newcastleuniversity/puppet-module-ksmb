@@ -1,12 +1,9 @@
 ---
 version: 5
 hierarchy:
-  - name: "distro release"
-    backend: yaml
+  - name: distro release
     path: "distro/%{::facts.lsbdistid}/%{::facts.lsbdistrelease}"
-  - name: "distro"
-    backend: yaml
+  - name: distro
     path: "distro/%{::facts.lsbdistid}"
-  - name: "common"
-    backend: yaml
-    path: "common"
+  - name: common
+    path: common
