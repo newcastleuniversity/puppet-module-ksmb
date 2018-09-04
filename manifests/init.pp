@@ -55,7 +55,9 @@ class ksmb (
 
 ) {
 
-  class { '::ksmb::install': } ->
-  class { '::ksmb::config': }
+  anchor { '::ksmb::begin': } ->
+  class { '::ksmb::install': } ~>
+  class { '::ksmb::config': } ->
+  anchor { '::ksmb::end': }
 
 }

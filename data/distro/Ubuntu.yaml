@@ -2,5 +2,4 @@
 ksmb::package_list:
   - smbclient
 ksmb::ppdpath: /usr/share/cups/model
-ksmb::filterpath: /usr/lib/cups/filter
 ksmb::service: cups

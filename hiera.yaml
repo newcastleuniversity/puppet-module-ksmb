@@ -1,13 +1,12 @@
 ---
-version: 4
-datadir: data
+version: 5
 hierarchy:
   - name: "distro release"
     backend: yaml
-    path: "distro/%{os.distro.id}/%{os.distro.codename}"
+    path: "distro/%{::facts.lsbdistid}/%{::facts.lsbdistrelease}"
   - name: "distro"
     backend: yaml
-    path: "distro/%{os.distro.id}"
+    path: "distro/%{::facts.lsbdistid}"
   - name: "common"
     backend: yaml
     path: "common"
