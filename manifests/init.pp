@@ -43,17 +43,7 @@
 # Copyright 2017 Your name here, unless otherwise noted.
 #
 
-class ksmb (
-
-  $ppdpath,
-  $ppdsource,
-  $ppdfiles,
-  $package_list,
-  $service,
-  $filterfiles,
-  $filterpath,
-
-) {
+class ksmb {
 
   anchor { '::ksmb::begin': } ->
   class { '::ksmb::install': } ~>
