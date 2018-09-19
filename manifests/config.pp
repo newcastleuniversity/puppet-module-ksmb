@@ -1,14 +1,14 @@
 class ksmb::config inherits ksmb {
 
-  file { '/etc/systemd/system/cups.service' :
-    ensure  => file,
-    replace => true,
-    owner   => root,
-    group   => root,
-    source  => "puppet:///modules/${module_name}/cups.service",
-    mode    => '0444',
-    notify  => Service[$ksmb::service],
-  }
+#  file { '/etc/systemd/system/cups.service' :
+#    ensure  => file,
+#    replace => true,
+#    owner   => root,
+#    group   => root,
+#    source  => "puppet:///modules/${module_name}/cups.service",
+#    mode    => '0444',
+#    notify  => Service[$ksmb::service],
+#  }
 
   $ksmb::ppdfiles.each |$ppdfile| {
 
@@ -19,7 +19,7 @@ class ksmb::config inherits ksmb {
       group   => 'root',
       source  => "${ksmb::ppdsource}/${ppdfile}",
       mode    => '0444',
-      notify  => Service[$ksmb::service],
+#      notify  => Service[$ksmb::service],
     }
 
   }
@@ -39,7 +39,7 @@ class ksmb::config inherits ksmb {
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
-    content => "#!/bin/dash\nsudo -u \$2 /usr/lib/cups/backend/ksmb.real \$DEVICE_URI \"\$@\"\n",
+    content => "#!/bin/bash\nsudo -u \$2 /usr/lib/cups/backend/ksmb.real \$DEVICE_URI \"\$@\"\n",
   }
 
   file { '/usr/lib/cups/backend/ksmb.real' :
