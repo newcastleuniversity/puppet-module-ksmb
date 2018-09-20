@@ -1,29 +1,5 @@
 class ksmb::config inherits ksmb {
 
-#  file { '/etc/systemd/system/cups.service' :
-#    ensure  => file,
-#    replace => true,
-#    owner   => root,
-#    group   => root,
-#    source  => "puppet:///modules/${module_name}/cups.service",
-#    mode    => '0444',
-#    notify  => Service[$ksmb::service],
-#  }
-
-  $ksmb::ppdfiles.each |$ppdfile| {
-
-    file { "${ksmb::ppdpath}/${ppdfile}" :
-      ensure  => file,
-      replace => true,
-      owner   => 'root',
-      group   => 'root',
-      source  => "${ksmb::ppdsource}/${ppdfile}",
-      mode    => '0444',
-#      notify  => Service[$ksmb::service],
-    }
-
-  }
-
   file { '/etc/sudoers.d/lp' :
     ensure  => file,
     replace => true,
