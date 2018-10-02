@@ -8,9 +8,6 @@
     * [Setup requirements](#setup-requirements)
     * [Beginning with ksmb](#beginning-with-ksmb)
 1. [Usage - Configuration options and additional functionality](#usage)
-1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-1. [Limitations - OS compatibility, etc.](#limitations)
-1. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
@@ -23,7 +20,7 @@ TODO: remove stated dependency on leoarnold-cups and rewrite docs to suggest use
 
 ## Setup
 
-### What ksmb affects **OPTIONAL**
+### What ksmb affects
 
 If it's obvious what your module touches, you can skip this section. For
 example, folks can probably figure out that your mysql_instance module affects
@@ -45,9 +42,11 @@ If there's more that they should know about, though, this is the place to mentio
 
 ### Beginning with ksmb
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+If you aren't using Hiera:
+``` puppet
+include ksmb
+```
+in your node definition will get the backend scripts in place.
 
 ## Usage
 
@@ -103,24 +102,6 @@ cups::default_queue: USB-Building-Printing
 cups::papersize: A4
 ```
 
-## Reference
-
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
-
 ## Limitations
 
 This is actually a limitation of leoarnold-cups, but it might help you when deploying: if your global hiera.yaml specifies a merge_behavior other than the default "native", you won't be able to set a default queue in a common.yaml and then override it further up the hierarchy.
-
-## Development
-
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.
