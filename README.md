@@ -36,10 +36,11 @@ If there's more that they should know about, though, this is the place to mentio
 * Dependencies that your module automatically installs.
 * Warnings or other important notices.
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-* You need puppetlabs-stdlib and leoarnold-cups Puppet modules.
-* You need a [file server mount point](https://docs.puppet.com/puppet/4.9/file_serving.html) on your Puppet server that is served as puppet:///files/printer-ppds, or else override that location in Hiera.
+* You need puppetlabs-stdlib.
+* You need a means of injecting the right PPD file for your printers.  I used ghoneycutt-types to create a file resource in Hiera and made a module to serve the files.
+* You need to manage your Cups queues.  We have used mosen-cups and now use leoarnold-cups.
 * You need a Linux system joined to the same AD domain as the Samba printer server and a valid Kerberos ticket for the user who wishes to print.  At my site, the Linux nodes use the AD to authenticate user logins.
 
 ### Beginning with ksmb
@@ -57,29 +58,49 @@ Put the following in your site.pp:
 hiera_include('classes')
 ```
 
-The following Hiera in a suitable place:
+The following example Hiera, tweaked to meet your needs, in a suitable yaml file:
 
 ``` yaml
 classes:
+# leoarnold-cups
   - cups
+# This module
   - ksmb
+# ghoneycutt-types
+  - types
+# A dummy module that exists for me to put arbitrary files in.  https://gitlab.ncl.ac.uk/puppet5/fileserver
+  - fileserver
 
-ksmb::ppdfiles:
-  - KMbeuC554ux.ppd
-ksmb::filterfiles:
-  - KMbeuEmpPS.pl
+types::files:
+  '/usr/share/cups/model/KOC658UX.ppd':
+    ensure: file
+    source: puppet:///modules/fileserver/ppds/KOC658UX.ppd
+    mode: '0644'
+    group: lp
 
-cups::hiera: merge
-cups::papersize: A4
-cups::web_interface: true
-cups::default_queue: PostRoom
-cups_queue:
-  PostRoom:
+cups::resources:
+  USB-Building-Printing:
     ensure: printer
-    uri: ksmb://printserver.example.com/PostRoomKonica
-    ppd: "%{::ksmb::ppdpath}/KMbeuC554ux.ppd"
-    accepting: true
+    uri: ksmb://cs-print/USB-BUILDING-PRINTING
+    ppd: /usr/share/cups/model/KOC658UX.ppd
+    shared: false
     enabled: true
+    accepting: true
+    description: All Urban Sciences printers, swipe your campus card at any printer to collect your job.
+    options:
+      KMDuplex: 2Sided
+      PageSize: A4
+      PaperSources: PC215
+      Finisher: FS533
+      KOPunch: PK519-4
+      SaddleUnit: None
+      PrinterHDD: HDD
+      SelectColor: Grayscale
+      Model: C458
+      TextPureBlack: On
+
+cups::default_queue: USB-Building-Printing
+cups::papersize: A4
 ```
 
 ## Reference
