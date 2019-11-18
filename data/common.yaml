@@ -1,1 +1,5 @@
 ---
+ksmb::package_list:
+  - smbclient
+ksmb::backend: /usr/lib/cups/backend
+ksmb::lcpaper: en_GB.UTF-8
