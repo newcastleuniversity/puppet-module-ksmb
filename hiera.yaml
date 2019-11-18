@@ -1,12 +1,13 @@
 ---
-version: 5
+version: 4
+datadir: data
 hierarchy:
-  - name: distro release
-    path: "distro/%{::facts.lsbdistid}/%{::facts.lsbdistrelease}.yaml"
-  - name: distro
-    path: "distro/%{::facts.lsbdistid}.yaml"
-  - name: common
-    path: common.yaml
-defaults:
-  data_hash: yaml_data
-  datadir: data
+  - name:    'distro release'
+    path:    "distro/%{::facts.lsbdistid}/%{::facts.lsbdistrelease}"
+    backend: yaml
+  - name:    'distro'
+    path:    "distro/%{::facts.lsbdistid}"
+    backend: yaml
+  - name:    'common'
+    path:    'common'
+    backend: yaml
