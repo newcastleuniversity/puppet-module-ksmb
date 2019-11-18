@@ -29,7 +29,7 @@ class ksmb::config inherits ksmb {
   # See https://forge.puppet.com/leoarnold/cups#limitations for next stanza
   augeas { 'papersize':
     context => '/files/etc/default/locale',
-    changes => 'set LC_PAPER \'"en_GB.UTF-8"\'' # Change to your locale
+    changes => "set LC_PAPER '\"${lcpaper}\"'"
   }
 
 }

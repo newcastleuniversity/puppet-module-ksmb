@@ -1,5 +1,0 @@
----
-ksmb::package_list:
-  - smbclient
-ksmb::ppdpath: /usr/share/cups/model
-ksmb::service: cups

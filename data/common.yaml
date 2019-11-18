@@ -1,9 +1,1 @@
 ---
-ksmb::ppdsource: 'puppet:///modules/%{module_name}/ppds'
-ksmb::ppdfiles:
-  - KOC658UX.ppd
-
-lookup_options:
-  ksmb::ppdfiles:
-    merge:
-      strategy: unique
